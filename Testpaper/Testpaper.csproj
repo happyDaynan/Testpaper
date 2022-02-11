@@ -147,10 +147,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BasePaperInfo.cs">
+    <Compile Include="Models\CN_MatPaperType.cs">
       <DependentUpon>paperModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PaperClass.cs">
+    <Compile Include="Models\CN_PaperCode.cs">
       <DependentUpon>paperModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\paperModel.Context.cs">
@@ -167,9 +167,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>paperModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PaperSort.cs">
-      <DependentUpon>paperModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModel\Dashboardviewmodel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

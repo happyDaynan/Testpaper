@@ -5,11 +5,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="7bd0f9d5919a4b689ea04844b24a5baf" Name="Diagram1">
-        <EntityTypeShape EntityType="testerModel.PaperClass" Width="1.5" PointX="3" PointY="0.875" />
-        <EntityTypeShape EntityType="testerModel.PaperSort" Width="1.5" PointX="0.75" PointY="1.125" />
-        <AssociationConnector Association="testerModel.FK_PaperClass_PaperSort" />
-        <EntityTypeShape EntityType="testerModel.BasePaperInfo" Width="1.5" PointX="3" PointY="4" />
-        <AssociationConnector Association="testerModel.FK_BasePaperInfo_PaperSort" />
+        <EntityTypeShape EntityType="testerModel.CN_MatPaperType" Width="1.5" PointX="0.75" PointY="1.375" />
+        <EntityTypeShape EntityType="testerModel.CN_PaperCode" Width="1.5" PointX="3" PointY="1" />
+        <AssociationConnector Association="testerModel.FK_CN_PaperCode_CN_MatPaperType" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

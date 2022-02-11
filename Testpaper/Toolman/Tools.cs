@@ -14,16 +14,17 @@ namespace Testpaper.Toolman
         {
             using (testerEntities db = new testerEntities())
             {
-                var classlist = db.PaperClass.ToArray();
+                
+                var classlist = db.CN_PaperCode.Where(m => !m.invalid.HasValue).ToArray();
 
                 List<SelectListItem> classselect = new List<SelectListItem>();
 
-                foreach (var item in classlist.Select(m => new { m.Id, m.ClassNo}))
+                foreach (var item in classlist.Select(m => new { m.code, m.remark }))
                 {
                     classselect.Add(new SelectListItem()
                     {
-                        Text = item.ClassNo,
-                        Value = item.Id.ToString()
+                        Text = item.code,
+                        Value = item.remark.ToString()
                     });
                 }
 

@@ -25,8 +25,7 @@ namespace Testpaper.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<PaperClass> PaperClass { get; set; }
-        public virtual DbSet<PaperSort> PaperSort { get; set; }
-        public virtual DbSet<BasePaperInfo> BasePaperInfo { get; set; }
+        public virtual DbSet<CN_MatPaperType> CN_MatPaperType { get; set; }
+        public virtual DbSet<CN_PaperCode> CN_PaperCode { get; set; }
     }
 }
