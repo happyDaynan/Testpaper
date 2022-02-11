@@ -1,0 +1,342 @@
+﻿@*@model Testpaper.Models.Dashboardviewmodel*@
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<style>
+    .toggle.ios, .toggle-on.ios, .toggle-off.ios {
+        border-radius: 20px;
+    }
+
+    .toggle.ios .toggle-handle {
+        border-radius: 20px;
+    }
+</style>
+
+
+
+<h3>紙箱物性分析工具</h3>
+<div class="container">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="text-left col-lg-6">材質資訊</div>
+                        <div class="text-right col-lg-6">
+                           <input id="material" type="checkbox" checked data-toggle="toggle" data-on="三張貼" data-off="五張貼" data-onstyle="success" data-offstyle="primary" data-style="ios" data-size="small"> 
+                        </div>
+                    </div>
+
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <table class="table table-striped">
+                                <tr>
+                                    <th class="col-lg-1">#</th>
+                                    <th class="col-lg-1">代號</th>
+                                    <th class="col-lg-2">基重</th>
+                                    <th class="col-lg-2">破裂指數</th>
+                                    <th class="col-lg-2">破裂強度</th>
+                                    <th class="col-lg-2">環壓指數</th>
+                                    <th class="col-lg-2">環壓強度</th>
+                                </tr>
+                                <tr>
+                                    <th class="col-lg-1">面紙</th>
+                                    <th class="col-lg-1">
+                                        @Html.DropDownList("Paper_1", (IEnumerable<SelectListItem>)ViewBag.Classno, "-請選擇-", htmlAttributes: new { @class = "form-control" })
+                                    </th>
+                                    <th class="col-lg-2">285</th>
+                                    <th class="col-lg-2">1.6</th>
+                                    <th class="col-lg-2">4.56</th>
+                                    <th class="col-lg-2">9</th>
+                                    <th class="col-lg-2">25.65</th>
+                                </tr>
+                                <tr>
+                                    <th class="col-lg-1">芯紙</th>
+                                    <th class="col-lg-2">
+                                        @Html.DropDownList("Paper_1", (IEnumerable<SelectListItem>)ViewBag.Classno, "-請選擇-", htmlAttributes: new { @class = "form-control" })
+                                    </th>
+                                    <th class="col-lg-2">285</th>
+                                    <th class="col-lg-2">1.6</th>
+                                    <th class="col-lg-2">4.56</th>
+                                    <th class="col-lg-2">9</th>
+                                    <th class="col-lg-2">25.65</th>
+                                </tr>
+                                <tr>
+                                    <th id="th_3" class="col-lg-1">底紙</th>
+                                    <th class="col-lg-2">
+                                        @Html.DropDownList("Paper_1", (IEnumerable<SelectListItem>)ViewBag.Classno, "-請選擇-", htmlAttributes: new { @class = "form-control" })
+                                    </th>
+                                    <th class="col-lg-2">285</th>
+                                    <th class="col-lg-2">1.6</th>
+                                    <th class="col-lg-2">4.56</th>
+                                    <th class="col-lg-2">9</th>
+                                    <th class="col-lg-2">25.65</th>
+                                </tr>
+                                <tr id="tr4">
+                                    <th class="col-lg-1">芯紙</th>
+                                    <th class="col-lg-2">
+                                        @Html.DropDownList("Paper_1", (IEnumerable<SelectListItem>)ViewBag.Classno, "-請選擇-", htmlAttributes: new { @class = "form-control" })
+                                    </th>
+                                    <th class="col-lg-2">285</th>
+                                    <th class="col-lg-2">1.6</th>
+                                    <th class="col-lg-2">4.56</th>
+                                    <th class="col-lg-2">9</th>
+                                    <th class="col-lg-2">25.65</th>
+                                </tr>
+                                <tr id="tr5">
+                                    <th class="col-lg-1">底紙</th>
+                                    <th class="col-lg-2">
+                                        @Html.DropDownList("Paper_1", (IEnumerable<SelectListItem>)ViewBag.Classno, "-請選擇-", htmlAttributes: new { @class = "form-control" })
+                                    </th>
+                                    <th class="col-lg-2">285</th>
+                                    <th class="col-lg-2">1.6</th>
+                                    <th class="col-lg-2">4.56</th>
+                                    <th class="col-lg-2">9</th>
+                                    <th class="col-lg-2">25.65</th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--row-->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="text-left col-lg-6">規格資訊</div>
+                        <div class="text-right col-lg-6">
+                           <input id="abox" type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="primary" data-on="A型箱" data-off="非A型箱" data-style="ios" data-size="small">
+                        </div>                       
+                    </div>
+                </div>    
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-inline">
+                                <div class="input-group">
+                                    <div class="input-group-addon">楞型</div>
+                                    @Html.DropDownList("Paper_1", (IEnumerable<SelectListItem>)ViewBag.Classno, htmlAttributes: new { @class = "form-control" })
+                                    <div class="input-group-addon">長</div>
+                                    @Html.Editor("long", new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+                                    <div class="input-group-addon">mm</div>
+                                    <div class="input-group-addon">寬</div>
+                                    @Html.Editor("width", new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+                                    <div class="input-group-addon">mm</div>
+                                    <div class="input-group-addon">高</div>
+                                    @Html.Editor("high", new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+                                    <div class="input-group-addon">mm</div>
+                                    <div id ="addon1" class="input-group-addon" for="cartonarea">紙箱面積</div>
+                                    @Html.Editor("cartonarea", new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+                                    <div id ="addon2" class="input-group-addon" for="cartonarea">mm</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--row-->
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>楞率1</th>
+                                    <th>100</th>
+                                    <th>楞率2</th>
+                                    <th>150</th>
+                                    <th>周長</th>
+                                    <th id="perimeter">0</th>
+                                    <th>K</th>
+                                    <th>0.123</th>
+                                </tr>
+                                <tr>
+                                    <th>紙板長</th>
+                                    <th id="cardboardlong">0</th>
+                                    <th>紙板寬</th>
+                                    <th id="cardboardwidth">0</th>
+                                    <th>面積</th>
+                                    <th id="cardboardarea">0</th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--row-->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="text-left col-lg-6">分析結果</div>
+                        <div class="text-right col-lg-6"> 基重: 749.4 g/m2</div>
+                    </div>              
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <table class="table table-bordered">
+                                <tr class="warning">
+                                    <th colspan="2">破裂強度</th>
+                                </tr>
+                                <tr>
+                                    <td>9.12kgf/cm2</td>
+                                </tr>
+                                <tr>
+                                    <td>123kpa</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-lg-9">
+                            <table class="table table-bordered">
+                                <tr class="danger">
+                                    <th colspan="3">邊壓強度</th>
+                                </tr>
+                                <tr>
+                                    <td>kgf/m</td>
+                                    <td>N/m</td>
+                                    <td>lb/in</td>
+                                </tr>
+                                <tr>
+                                    <td>477.87</td>
+                                    <td>4686.34</td>
+                                    <td>26.76</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                    </div>
+                    <div id="boxinfo" class="row">
+                        <div class="col-lg-12">
+                            <table class="table table-bordered">
+                                <tr class="warning">
+                                    <th colspan="5">壓箱強度 單位:Kgf 箱重: 396.79g</th>
+                                </tr>
+                                <tr>
+                                    <td>馬基公式</td>
+                                    <td>214.15</td>
+                                    <td>192.73</td>
+                                    <td>171.32</td>
+                                    <td>149.90</td>
+                                </tr>
+                                <tr>
+                                    <td>原始採購公式</td>
+                                    <td>271.65</td>
+                                    <td>244.48</td>
+                                    <td>217.32</td>
+                                    <td>190.15</td>
+                                </tr>
+                                <tr>
+                                    <td>百分比%</td>
+                                    <td>100%</td>
+                                    <td>90%</td>
+                                    <td>80%</td>
+                                    <td>70%</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <blockquote>
+                        <p>※以上計算值為，使用指定等級之原材料時，理論上應有的最低強度</p>
+                        <p>※生產製程、原物料本身差異、產品箱型設計...等皆可能影響數據</p>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </div><!--row-->
+</div>
+
+
+
+
+
+<script src="~/Scripts/jquery-2.2.4.min.js"></script>
+<link href="~/Content/BootstrapToggle/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="~/Scripts/BootstrapToggle/bootstrap-toggle.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Toolman/Tools.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+
+        var longstr, widthstr, highstr;
+        $('#tr4').hide();
+        $('#tr5').hide();
+
+        $('#addon1').show();
+        $('#addon2').show();
+        $('#cartonarea').show();
+        $('#boxinfo').hide();
+
+        $('#long').change(function () {
+
+            longstr = parseInt($('#long').val());
+            Dataprocessing(longstr, widthstr, highstr);
+        });
+
+        $('#width').change(function () {
+
+            widthstr = parseInt($('#width').val());
+            Dataprocessing(longstr, widthstr, highstr);
+        });
+
+        $('#high').change(function () {
+
+            highstr = parseInt($('#high').val());
+            Dataprocessing(longstr, widthstr, highstr);
+        });
+
+        console.log(longstr, widthstr, highstr);
+      
+        
+    });
+    
+
+    $('#material').change(function () {
+
+        if ($(this).prop('checked') === false) {
+            $('#th_3').html('中紙');
+            $('#tr4').show();
+            $('#tr5').show();
+        }
+        else {
+            $('#th_3').html('底紙');
+            $('#tr4').hide();
+            $('#tr5').hide();
+        }
+    });
+
+    // 判斷是否為A型箱
+    $('#abox').change(function () {
+
+        if ($(this).prop('checked') === false) {
+            //console.log('no a');
+            $('#addon1').show();
+            $('#addon2').show();
+            $('#cartonarea').show();
+            $('#boxinfo').hide();
+        }
+        else {
+            //console.log('is a');
+            $('#addon1').hide();
+            $('#addon2').hide();
+            $('#cartonarea').hide();            
+            $('#boxinfo').show();
+        }
+    });
+
+
+    
+
+</script>

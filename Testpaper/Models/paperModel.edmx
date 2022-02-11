@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="testerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BasePaperInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SortId" Type="int" Nullable="false" />
+          <Property Name="BasePaperNo" Type="int" Nullable="false" />
+          <Property Name="RuptureValue" Type="numeric" Precision="2" Scale="1" />
+          <Property Name="PressureValue" Type="numeric" Precision="3" Scale="1" />
+        </EntityType>
+        <EntityType Name="PaperClass">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SortId" Type="int" Nullable="false" />
+          <Property Name="ClassNo" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="BaseWeighMin" Type="int" Nullable="false" />
+          <Property Name="BaseWeighMax" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PaperSort">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="No" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_BasePaperInfo_PaperSort">
+          <End Role="PaperSort" Type="Self.PaperSort" Multiplicity="1" />
+          <End Role="BasePaperInfo" Type="Self.BasePaperInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaperSort">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BasePaperInfo">
+              <PropertyRef Name="SortId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaperClass_PaperSort">
+          <End Role="PaperSort" Type="Self.PaperSort" Multiplicity="1" />
+          <End Role="PaperClass" Type="Self.PaperClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaperSort">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaperClass">
+              <PropertyRef Name="SortId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="testerModelStoreContainer">
+          <EntitySet Name="BasePaperInfo" EntityType="Self.BasePaperInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaperClass" EntityType="Self.PaperClass" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaperSort" EntityType="Self.PaperSort" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BasePaperInfo_PaperSort" Association="Self.FK_BasePaperInfo_PaperSort">
+            <End Role="PaperSort" EntitySet="PaperSort" />
+            <End Role="BasePaperInfo" EntitySet="BasePaperInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaperClass_PaperSort" Association="Self.FK_PaperClass_PaperSort">
+            <End Role="PaperSort" EntitySet="PaperSort" />
+            <End Role="PaperClass" EntitySet="PaperClass" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="testerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="testerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="PaperClass" EntityType="testerModel.PaperClass" />
+          <EntitySet Name="PaperSort" EntityType="testerModel.PaperSort" />
+          <AssociationSet Name="FK_PaperClass_PaperSort" Association="testerModel.FK_PaperClass_PaperSort">
+            <End Role="PaperSort" EntitySet="PaperSort" />
+            <End Role="PaperClass" EntitySet="PaperClass" />
+          </AssociationSet>
+          <EntitySet Name="BasePaperInfo" EntityType="testerModel.BasePaperInfo" />
+          <AssociationSet Name="FK_BasePaperInfo_PaperSort" Association="testerModel.FK_BasePaperInfo_PaperSort">
+            <End Role="PaperSort" EntitySet="PaperSort" />
+            <End Role="BasePaperInfo" EntitySet="BasePaperInfo" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="PaperClass">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SortId" Type="Int32" Nullable="false" />
+          <Property Name="ClassNo" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="BaseWeighMin" Type="Int32" Nullable="false" />
+          <Property Name="BaseWeighMax" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PaperSort" Relationship="testerModel.FK_PaperClass_PaperSort" FromRole="PaperClass" ToRole="PaperSort" />
+        </EntityType>
+        <EntityType Name="PaperSort">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="No" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PaperClass" Relationship="testerModel.FK_PaperClass_PaperSort" FromRole="PaperSort" ToRole="PaperClass" />
+          <NavigationProperty Name="BasePaperInfo" Relationship="testerModel.FK_BasePaperInfo_PaperSort" FromRole="PaperSort" ToRole="BasePaperInfo" />
+        </EntityType>
+        <Association Name="FK_PaperClass_PaperSort">
+          <End Type="testerModel.PaperSort" Role="PaperSort" Multiplicity="1" />
+          <End Type="testerModel.PaperClass" Role="PaperClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaperSort">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaperClass">
+              <PropertyRef Name="SortId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="BasePaperInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SortId" Type="Int32" Nullable="false" />
+          <Property Name="BasePaperNo" Type="Int32" Nullable="false" />
+          <Property Name="RuptureValue" Type="Decimal" Precision="2" Scale="1" />
+          <Property Name="PressureValue" Type="Decimal" Precision="3" Scale="1" />
+          <NavigationProperty Name="PaperSort" Relationship="testerModel.FK_BasePaperInfo_PaperSort" FromRole="BasePaperInfo" ToRole="PaperSort" />
+        </EntityType>
+        <Association Name="FK_BasePaperInfo_PaperSort">
+          <End Type="testerModel.PaperSort" Role="PaperSort" Multiplicity="1" />
+          <End Type="testerModel.BasePaperInfo" Role="BasePaperInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaperSort">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BasePaperInfo">
+              <PropertyRef Name="SortId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="testerModelStoreContainer" CdmEntityContainer="testerEntities">
+          <EntitySetMapping Name="PaperClass">
+            <EntityTypeMapping TypeName="testerModel.PaperClass">
+              <MappingFragment StoreEntitySet="PaperClass">
+                <ScalarProperty Name="BaseWeighMax" ColumnName="BaseWeighMax" />
+                <ScalarProperty Name="BaseWeighMin" ColumnName="BaseWeighMin" />
+                <ScalarProperty Name="ClassNo" ColumnName="ClassNo" />
+                <ScalarProperty Name="SortId" ColumnName="SortId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaperSort">
+            <EntityTypeMapping TypeName="testerModel.PaperSort">
+              <MappingFragment StoreEntitySet="PaperSort">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BasePaperInfo">
+            <EntityTypeMapping TypeName="testerModel.BasePaperInfo">
+              <MappingFragment StoreEntitySet="BasePaperInfo">
+                <ScalarProperty Name="PressureValue" ColumnName="PressureValue" />
+                <ScalarProperty Name="RuptureValue" ColumnName="RuptureValue" />
+                <ScalarProperty Name="BasePaperNo" ColumnName="BasePaperNo" />
+                <ScalarProperty Name="SortId" ColumnName="SortId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
