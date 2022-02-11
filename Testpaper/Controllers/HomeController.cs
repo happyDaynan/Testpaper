@@ -15,9 +15,13 @@ namespace Testpaper.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            ViewBag.Classno = Tools.PaperClass();
+            var data = db.CN_PaperCode.ToArray();
 
-            return View();
+            ViewBag.Classno = Tools.PaperClass();
+            ViewBag.Corrugated = Tools.Corrugated();
+            // ViewBag.data = data;
+
+            return View(data);
         }
 
         

@@ -48,3 +48,10 @@
  
 
 };
+
+
+// 取資料
+function getWet(paperid, name) {
+
+    
+}

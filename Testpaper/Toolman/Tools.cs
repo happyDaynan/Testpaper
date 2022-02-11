@@ -19,12 +19,12 @@ namespace Testpaper.Toolman
 
                 List<SelectListItem> classselect = new List<SelectListItem>();
 
-                foreach (var item in classlist.Select(m => new { m.code, m.remark }))
+                foreach (var item in classlist.OrderByDescending(m => m.remark).Select(m => new { m.code, m.id, m.avgWet }))
                 {
                     classselect.Add(new SelectListItem()
                     {
                         Text = item.code,
-                        Value = item.remark.ToString()
+                        Value = item.id.ToString()
                     });
                 }
 
@@ -32,5 +32,27 @@ namespace Testpaper.Toolman
             }
 
         }
+
+        // 楞型
+        public static List<SelectListItem> Corrugated() {
+            using (testerEntities db = new testerEntities())
+            {
+                var Corrugatedlist = db.corrugatedTypedetail.ToArray();
+
+                List<SelectListItem> Corrugatedselect = new List<SelectListItem>();
+
+                foreach (var item in Corrugatedlist)
+                {
+                    Corrugatedselect.Add(new SelectListItem()
+                    {
+                        Text = item.corrugatedType,
+                        Value = item.Id.ToString()
+                    });
+                }
+
+                return Corrugatedselect;
+            }
+        }
+
     }
 }

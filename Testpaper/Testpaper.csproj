@@ -153,6 +153,9 @@
     <Compile Include="Models\CN_PaperCode.cs">
       <DependentUpon>paperModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\corrugatedTypedetail.cs">
+      <DependentUpon>paperModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\paperModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

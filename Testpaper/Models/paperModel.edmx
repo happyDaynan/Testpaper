@@ -39,6 +39,16 @@
           <Property Name="modifyUser" Type="varchar" MaxLength="30" />
           <Property Name="modifyTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="corrugatedTypedetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="corrugatedType" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="corrugatedrate" Type="decimal" Precision="3" Scale="2" />
+          <Property Name="corrugatedhigh" Type="decimal" Precision="2" Scale="1" />
+          <Property Name="k" Type="decimal" Precision="4" Scale="3" />
+        </EntityType>
         <Association Name="FK_CN_PaperCode_CN_MatPaperType">
           <End Role="CN_MatPaperType" Type="Self.CN_MatPaperType" Multiplicity="1" />
           <End Role="CN_PaperCode" Type="Self.CN_PaperCode" Multiplicity="*" />
@@ -54,6 +64,7 @@
         <EntityContainer Name="testerModelStoreContainer">
           <EntitySet Name="CN_MatPaperType" EntityType="Self.CN_MatPaperType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CN_PaperCode" EntityType="Self.CN_PaperCode" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="corrugatedTypedetail" EntityType="Self.corrugatedTypedetail" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_CN_PaperCode_CN_MatPaperType" Association="Self.FK_CN_PaperCode_CN_MatPaperType">
             <End Role="CN_MatPaperType" EntitySet="CN_MatPaperType" />
             <End Role="CN_PaperCode" EntitySet="CN_PaperCode" />
@@ -70,6 +81,7 @@
             <End Role="CN_MatPaperType" EntitySet="CN_MatPaperType" />
             <End Role="CN_PaperCode" EntitySet="CN_PaperCode" />
           </AssociationSet>
+          <EntitySet Name="corrugatedTypedetail" EntityType="testerModel.corrugatedTypedetail" />
         </EntityContainer>
         <EntityType Name="CN_MatPaperType">
           <Key>
@@ -119,6 +131,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="corrugatedTypedetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="corrugatedType" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="corrugatedrate" Type="Decimal" Precision="3" Scale="2" />
+          <Property Name="corrugatedhigh" Type="Decimal" Precision="2" Scale="1" />
+          <Property Name="k" Type="Decimal" Precision="4" Scale="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -158,6 +180,17 @@
                 <ScalarProperty Name="code" ColumnName="code" />
                 <ScalarProperty Name="issueDate" ColumnName="issueDate" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="corrugatedTypedetail">
+            <EntityTypeMapping TypeName="testerModel.corrugatedTypedetail">
+              <MappingFragment StoreEntitySet="corrugatedTypedetail">
+                <ScalarProperty Name="k" ColumnName="k" />
+                <ScalarProperty Name="corrugatedhigh" ColumnName="corrugatedhigh" />
+                <ScalarProperty Name="corrugatedrate" ColumnName="corrugatedrate" />
+                <ScalarProperty Name="corrugatedType" ColumnName="corrugatedType" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
