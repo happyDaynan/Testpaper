@@ -28,5 +28,6 @@ namespace Testpaper.Models
         public virtual DbSet<CN_MatPaperType> CN_MatPaperType { get; set; }
         public virtual DbSet<CN_PaperCode> CN_PaperCode { get; set; }
         public virtual DbSet<corrugatedTypedetail> corrugatedTypedetail { get; set; }
+        public virtual DbSet<basepaper_physicalproperty> basepaper_physicalproperty { get; set; }
     }
 }

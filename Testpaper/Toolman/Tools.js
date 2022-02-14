@@ -41,17 +41,82 @@
         $('#cardboardarea').html(cardboardarea)
     }
 
-    // 
-
-    
-
- 
 
 };
 
 
-// 取資料
-function getWet(paperid, name) {
+// 取wet
+//function getWet(paperid, mydata) {
+
+//    var wet = 0;
+
+//    mydata.forEach(function (item) {
+//        if (paperid == item.id) {
+//            wet =  item.avgWet;
+//        }           
+//    });
+
+//    return wet;   
+//}
+
+// 變更基重
+function changewet(selectname, wet) {
+    
+    switch (selectname) {
+        case 'p1':
+            $('#p1-Wet').html(wet)
+            break;
+        case 'p2':
+            $('#p2-Wet').html(wet)
+            break;
+        case 'p3':
+            $('#p3-Wet').html(wet) 
+            break;
+        case 'c1':
+            $('#c1-Wet').html(wet)
+            break;
+        case 'c2':
+            $('#c2-Wet').html(wet)
+            break;
+
+    }
+}
+
+// 處理破裂指數與環壓指數
+function ringruptureindex(papertypeid ,wet, Ringruptureindexdata) {
+
+    var rank;
+    
+
+    // console.log(rank);
+    // var data = Ringruptureindexdata.find(element => element.papertypeid == papertypeid);
+
+    // console.log('in', Ringruptureindexdata);
+    
+
+}
+
+// Corrugatedinfo
+function cheangeinfo(id, Corrugateddetail) {
 
     
+
+    var cinfo = Corrugateddetail.find(element => element.Id == id);
+
+    if (id != 6) {
+        
+        $('#c-rate').html(cinfo.corrugatedrate);
+        
+    } else {
+
+        var a = Corrugateddetail.find(element => element.Id == 1).corrugatedrate;
+        var b = Corrugateddetail.find(element => element.Id == 2).corrugatedrate;
+        let c = a + '/' + b;
+
+        $('#c-rate').html(c);
+    }
+    
+    
+    $('#c-high').html(cinfo.corrugatedhigh);
+    $('#k').html(cinfo.k);
 }

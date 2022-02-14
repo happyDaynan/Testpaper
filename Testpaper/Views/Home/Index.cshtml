@@ -1,9 +1,10 @@
-﻿@model IEnumerable<Testpaper.Models.CN_PaperCode>
+﻿@using Newtonsoft.Json;
+@*@model IEnumerable<Testpaper.Models.CN_PaperCode>*@
 
 @{
     ViewBag.Title = "Index";
 
-    // ViewBag.data = @Model;
+    
 }
 
 
@@ -12,9 +13,9 @@
         border-radius: 20px;
     }
 
-    .toggle.ios .toggle-handle {
-        border-radius: 20px;
-    }
+        .toggle.ios .toggle-handle {
+            border-radius: 20px;
+        }
 </style>
 
 
@@ -50,9 +51,9 @@
                                 <tr>
                                     <th class="col-lg-1">面紙</th>
                                     <th class="col-lg-1">
-                                        @Html.DropDownList("Paper_1", (IEnumerable<SelectListItem>)ViewBag.Classno, "-請選擇-", htmlAttributes: new { @class = "form-control", Name= "p1" })
+                                        @Html.DropDownList("Paper_1", (IEnumerable<SelectListItem>)ViewBag.Classno, "-請選擇-", htmlAttributes: new { @class = "form-control", Name = "p1" })
                                     </th>
-                                    <th id="p1-avgWet" class="col-lg-2">0</th>
+                                    <th id="p1-Wet" class="col-lg-2">0</th>
                                     <th id="p1-a" class="col-lg-2">0</th>
                                     <th class="col-lg-2">0</th>
                                     <th class="col-lg-2">0</th>
@@ -61,9 +62,9 @@
                                 <tr>
                                     <th class="col-lg-1">芯紙</th>
                                     <th class="col-lg-2">
-                                        @Html.DropDownList("Paper_2", (IEnumerable<SelectListItem>)ViewBag.Classno, "-請選擇-", htmlAttributes: new { @class = "form-control", Name = "p2" })
+                                        @Html.DropDownList("Corepaper_1", (IEnumerable<SelectListItem>)ViewBag.Corepaper, "-請選擇-", htmlAttributes: new { @class = "form-control", Name = "c1" })
                                     </th>
-                                    <th id="p2-avgWet"class="col-lg-2">0</th>
+                                    <th id="c1-Wet" class="col-lg-2">0</th>
                                     <th class="col-lg-2">0</th>
                                     <th class="col-lg-2">0</th>
                                     <th class="col-lg-2">0</th>
@@ -72,9 +73,9 @@
                                 <tr>
                                     <th id="th_3" class="col-lg-1">底紙</th>
                                     <th class="col-lg-2">
-                                        @Html.DropDownList("Paper_3", (IEnumerable<SelectListItem>)ViewBag.Classno, "-請選擇-", htmlAttributes: new { @class = "form-control", Name = "p3" })
+                                        @Html.DropDownList("Paper_2", (IEnumerable<SelectListItem>)ViewBag.Classno, "-請選擇-", htmlAttributes: new { @class = "form-control", Name = "p2" })
                                     </th>
-                                    <th id="p3-avgWet" class="col-lg-2">0</th>
+                                    <th id="p2-Wet" class="col-lg-2">0</th>
                                     <th class="col-lg-2">0</th>
                                     <th class="col-lg-2">0</th>
                                     <th class="col-lg-2">0</th>
@@ -83,9 +84,9 @@
                                 <tr id="tr4">
                                     <th class="col-lg-1">芯紙</th>
                                     <th class="col-lg-2">
-                                        @Html.DropDownList("Paper_4", (IEnumerable<SelectListItem>)ViewBag.Classno, "-請選擇-", htmlAttributes: new { @class = "form-control" })
+                                        @Html.DropDownList("Corepaper_2", (IEnumerable<SelectListItem>)ViewBag.Corepaper, "-請選擇-", htmlAttributes: new { @class = "form-control", Name = "c2" })
                                     </th>
-                                    <th class="col-lg-2">0</th>
+                                    <th id="c2-Wet" class="col-lg-2">0</th>
                                     <th class="col-lg-2">0</th>
                                     <th class="col-lg-2">0</th>
                                     <th class="col-lg-2">0</th>
@@ -94,9 +95,9 @@
                                 <tr id="tr5">
                                     <th class="col-lg-1">底紙</th>
                                     <th class="col-lg-2">
-                                        @Html.DropDownList("Paper_5", (IEnumerable<SelectListItem>)ViewBag.Classno, "-請選擇-", htmlAttributes: new { @class = "form-control" })
+                                        @Html.DropDownList("Paper_3", (IEnumerable<SelectListItem>)ViewBag.Classno, "-請選擇-", htmlAttributes: new { @class = "form-control", Name = "p3" })
                                     </th>
-                                    <th class="col-lg-2">0</th>
+                                    <th id="p3-Wet" class="col-lg-2">0</th>
                                     <th class="col-lg-2">0</th>
                                     <th class="col-lg-2">0</th>
                                     <th class="col-lg-2">0</th>
@@ -126,7 +127,7 @@
                             <div class="form-inline">
                                 <div class="input-group">
                                     <div class="input-group-addon">楞型</div>
-                                    @Html.DropDownList("corrugated", (IEnumerable<SelectListItem>)ViewBag.Corrugated, htmlAttributes: new { @class = "form-control"})
+                                    @Html.DropDownList("corrugated", (IEnumerable<SelectListItem>)ViewBag.Corrugated, htmlAttributes: new { @class = "form-control", Name = "corrugated" })
                                     <div class="input-group-addon">長</div>
                                     @Html.Editor("long", new { htmlAttributes = new { @class = "form-control", @type = "number" } })
                                     <div class="input-group-addon">mm</div>
@@ -148,10 +149,10 @@
                         <div class="col-lg-12">
                             <table class="table table-bordered">
                                 <tr>
-                                    <th>楞率1</th>
-                                    <th>100</th>
-                                    <th>楞率2</th>
-                                    <th>150</th>
+                                    <th>楞率</th>
+                                    <th id="c-rate">0</th>
+                                    <th>楞高</th>
+                                    <th id="c-high">0</th>
                                     <th>周長</th>
                                     <th id="perimeter">0</th>
                                     <th>K</th>
@@ -178,7 +179,7 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="text-left col-lg-6">分析結果</div>
-                        <div class="text-right col-lg-6"> 基重: 749.4 g/m2</div>
+                        <div id="wet-info"class="text-right col-lg-6"> 基重: 749.4 g/m2</div>
                     </div>
                 </div>
                 <div class="panel-body">
@@ -272,6 +273,12 @@
 <script>
     $(document).ready(function () {
 
+        material.bootstrapToggle();
+
+        const mydata = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.data));
+        const Corrugateddetail = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.Corrugateddetail));
+        const Ringruptureindexdata = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.ringruptureindex));
+
         var longstr, widthstr, highstr;
         $('#tr4').hide();
         $('#tr5').hide();
@@ -303,38 +310,50 @@
         // 處裡選紙
         $('select').change(function () {
 
-            // 選哪一種紙
-            let paper = $(this).val();
-
             // 哪個下拉選被選
-            let name = $(this).attr("name");
-            
-          
-            console.log('paper_selected is change!!!', name, paper);
+            let selectname = $(this).attr("name");
+            // console.log(selectname);
+
+            if (selectname !== 'corrugated') {
+                // 選哪一種紙
+                let paperid = $(this).val();
+
+                let wet = mydata.find(element => element.id == paperid).avgWet;
+
+                let papertypeid = mydata.find(element => element.id == paperid).remark;
+
+                          
+
+                console.log(typeof(wet));
+
+                // 變更基重值
+                changewet(selectname, papertypeid, wet);
+
+                ringruptureindex(papertypeid, wet, Ringruptureindexdata);
+            }
+            else {
+
+                let id = $(this).val();
+                // console.log(Corrugateddetail);
+                if (id == '6') {
+                    console.log('is AB');
+                    // 選到AB
+                    material.bootstrapToggle('toggle');
+
+                } else {
+                    console.log('not AB');
+                    material.bootstrapToggle('toggle');
+                }
+
+                // Corrugatedinfo
+                cheangeinfo(id, Corrugateddetail);
+               
+            }
 
             
+
+
         });
-
-        // 處理K
-        //$('#').change(function () {
-        //    // 如果是CEF K=0
-        //    if () {
-        //        switch () {
-        //            case 'A':
-        //                $('#k').html(0.748);
-        //                break;
-        //            case 'B':
-        //                $('#k').html(0);
-        //                break;
-        //        }
-        //    }
-        //    else {
-        //        $('#k').html(0);
-        //    }
-
-
-        //});
-
 
 
         console.log(longstr, widthstr, highstr);
@@ -343,7 +362,7 @@
     });
 
 
-    $('#material').change(function () {
+    var material = $('#material').change(function () {
 
         if ($(this).prop('checked') === false) {
             $('#th_3').html('中紙');
@@ -376,7 +395,7 @@
         }
     });
 
-    
+
 
 
 

@@ -9,6 +9,7 @@
         <EntityTypeShape EntityType="testerModel.CN_PaperCode" Width="1.5" PointX="3" PointY="1" />
         <AssociationConnector Association="testerModel.FK_CN_PaperCode_CN_MatPaperType" />
         <EntityTypeShape EntityType="testerModel.corrugatedTypedetail" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="testerModel.basepaper_physicalproperty" Width="1.5" PointX="0.75" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

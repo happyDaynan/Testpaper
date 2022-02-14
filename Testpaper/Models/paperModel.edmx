@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="testerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="basepaper_physicalproperty">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="paperTypeId" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="rank" Type="char" MaxLength="1" />
+          <Property Name="ruptureIndex" Type="decimal" Precision="2" Scale="1" />
+          <Property Name="ringIndex" Type="decimal" Precision="3" Scale="1" />
+        </EntityType>
         <EntityType Name="CN_MatPaperType">
           <Key>
             <PropertyRef Name="id" />
@@ -62,6 +72,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="testerModelStoreContainer">
+          <EntitySet Name="basepaper_physicalproperty" EntityType="Self.basepaper_physicalproperty" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CN_MatPaperType" EntityType="Self.CN_MatPaperType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CN_PaperCode" EntityType="Self.CN_PaperCode" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="corrugatedTypedetail" EntityType="Self.corrugatedTypedetail" Schema="dbo" store:Type="Tables" />
@@ -82,6 +93,7 @@
             <End Role="CN_PaperCode" EntitySet="CN_PaperCode" />
           </AssociationSet>
           <EntitySet Name="corrugatedTypedetail" EntityType="testerModel.corrugatedTypedetail" />
+          <EntitySet Name="basepaper_physicalproperty" EntityType="testerModel.basepaper_physicalproperty" />
         </EntityContainer>
         <EntityType Name="CN_MatPaperType">
           <Key>
@@ -141,6 +153,16 @@
           <Property Name="corrugatedhigh" Type="Decimal" Precision="2" Scale="1" />
           <Property Name="k" Type="Decimal" Precision="4" Scale="3" />
         </EntityType>
+        <EntityType Name="basepaper_physicalproperty">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="paperTypeId" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="rank" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="ruptureIndex" Type="Decimal" Precision="2" Scale="1" />
+          <Property Name="ringIndex" Type="Decimal" Precision="3" Scale="1" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -190,6 +212,17 @@
                 <ScalarProperty Name="corrugatedhigh" ColumnName="corrugatedhigh" />
                 <ScalarProperty Name="corrugatedrate" ColumnName="corrugatedrate" />
                 <ScalarProperty Name="corrugatedType" ColumnName="corrugatedType" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="basepaper_physicalproperty">
+            <EntityTypeMapping TypeName="testerModel.basepaper_physicalproperty">
+              <MappingFragment StoreEntitySet="basepaper_physicalproperty">
+                <ScalarProperty Name="ringIndex" ColumnName="ringIndex" />
+                <ScalarProperty Name="ruptureIndex" ColumnName="ruptureIndex" />
+                <ScalarProperty Name="rank" ColumnName="rank" />
+                <ScalarProperty Name="paperTypeId" ColumnName="paperTypeId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

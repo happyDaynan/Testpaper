@@ -10,12 +10,29 @@ namespace Testpaper.Toolman
 {
     public class Tools
     {
+        // 產生處理過的paperCode
+        //public static List<CN_PaperCode> PaperCodes()
+        //{
+        //    using (testerEntities db = new testerEntities())
+        //    {
+        //        var a = db.CN_PaperCode.Where(m => !m.invalid.HasValue).ToArray();
+
+        //        return a;
+        //    }
+        //}
+
         public static List<SelectListItem> PaperClass()
         {
             using (testerEntities db = new testerEntities())
             {
-                
-                var classlist = db.CN_PaperCode.Where(m => !m.invalid.HasValue).ToArray();
+                List<string> Core = new List<string>()
+                {
+                    "302",
+                    "307"
+                };
+
+
+                var classlist = db.CN_PaperCode.Where(m => !m.invalid.HasValue && !Core.Contains(m.remark)).ToArray();
 
                 List<SelectListItem> classselect = new List<SelectListItem>();
 
@@ -31,6 +48,34 @@ namespace Testpaper.Toolman
                 return classselect;
             }
 
+        }
+
+        // 芯紙
+        public static List<SelectListItem> Corepaper()
+        {
+            using (testerEntities db = new testerEntities())
+            {
+                List<string> Core = new List<string>()
+                {
+                    "302",
+                    "307"
+                };
+
+                var Corelist = db.CN_PaperCode.Where(m => !m.invalid.HasValue && Core.Contains(m.remark)).ToArray();
+
+                List<SelectListItem> Coreselect = new List<SelectListItem>();
+
+                foreach(var item in Corelist)
+                {
+                    Coreselect.Add(new SelectListItem() {
+                        Text = item.code,
+                        Value = item.id.ToString()
+                    });
+                }
+
+
+                return Coreselect;
+            }    
         }
 
         // 楞型
