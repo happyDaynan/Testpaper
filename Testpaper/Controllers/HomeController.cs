@@ -15,7 +15,7 @@ namespace Testpaper.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            ViewBag.data = db.CN_PaperCode.Where(m => !m.invalid.HasValue)
+            ViewBag.data = db.CN_PaperCode.Where(m => m.invalid != true)
                            .Select(m => new { m.id, m.avgWet, m.remark}).ToArray();
 
             ViewBag.Corrugateddetail = db.corrugatedTypedetail.ToArray();
