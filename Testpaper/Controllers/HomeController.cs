@@ -26,7 +26,6 @@ namespace Testpaper.Controllers
             ViewBag.Corrugated = Tools.Corrugated();
             ViewBag.Corepaper = Tools.Corepaper();
 
-            // ViewBag.data = data;
 
             return View();
         }

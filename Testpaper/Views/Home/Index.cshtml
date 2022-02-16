@@ -178,8 +178,10 @@
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <div class="row">
-                        <div class="text-left col-lg-6">分析結果</div>
-                        <div id="wet-info"class="text-right col-lg-6"> 基重: 749.4 g/m2</div>
+                        <div class="text-left col-lg-8">分析結果</div>
+                        @*<div id="wet-info" class="text-right col-lg-6">基重: 0 g/m2 箱重: 0g</div>*@
+                        <div id="wet-info" class="text-right col-lg-2">基重: 0 g/m2</div>
+                        <div id="box-wet" class="text-right col-lg-2">箱重: 0g</div>
                     </div>
                 </div>
                 <div class="panel-body">
@@ -220,21 +222,21 @@
                         <div class="col-lg-12">
                             <table class="table table-bordered">
                                 <tr class="warning">
-                                    <th colspan="5">壓箱強度 單位:Kgf 箱重: 396.79g</th>
+                                    <th colspan="5">壓箱強度 單位:Kgf </th>
                                 </tr>
                                 <tr>
                                     <td>馬基公式</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
+                                    <td id="m1">0</td>
+                                    <td id="m2">0</td>
+                                    <td id="m3">0</td>
+                                    <td id="m4">0</td>
                                 </tr>
                                 <tr>
                                     <td>原始採購公式</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
+                                    <td id="p1">0</td>
+                                    <td id="p2">0</td>
+                                    <td id="p3">0</td>
+                                    <td id="p4">0</td>
                                 </tr>
                                 <tr>
                                     <td>百分比%</td>
@@ -271,6 +273,9 @@
 
 
 <script>
+    //let box_perimeter = 0; 
+    //let box_ringstrength = 0;
+
     $(document).ready(function () {
 
         material.bootstrapToggle();
@@ -281,10 +286,12 @@
 
         const r1dict = {};
         const r2dict = {};
+        const r3dict = {};
+        
         let rate;
-
-
-        var longstr, widthstr, highstr;
+        let longstr, widthstr, highstr, areastr, basewet = 0;
+        
+     
         $('#tr4').hide();
         $('#tr5').hide();
 
@@ -294,24 +301,28 @@
         $('#boxinfo').hide();
 
         $('#long').change(function () {
-
             longstr = parseInt($('#long').val());
             Dataprocessing(longstr, widthstr, highstr);
+            
         });
 
         $('#width').change(function () {
-
             widthstr = parseInt($('#width').val());
             Dataprocessing(longstr, widthstr, highstr);
         });
 
-        $('#high').change(function () {
-
+        $('#high').change(function () {     
             highstr = parseInt($('#high').val());
-            Dataprocessing(longstr, widthstr, highstr);
+            Dataprocessing(longstr, widthstr, highstr);   
         });
 
+        $('#cartonarea').change(function () {
+            areastr = $(this).val();
+            console.log('out', areastr);
+            Dataprocessing(longstr, widthstr, highstr, areastr, basewet);
+        });
 
+                   
         // 處裡選紙
         $('select').change(function () {
 
@@ -325,6 +336,8 @@
 
                 let wet = mydata.find(element => element.id == paperid).avgWet;
 
+                r3dict[selectname] = wet ;
+
                 let papertypeid = mydata.find(element => element.id == paperid).remark;
 
                 let ringrupturedata = ringruptureindex(papertypeid, wet, Ringruptureindexdata);
@@ -332,16 +345,24 @@
                 // 變更基重值
                 changewet(selectname, wet, ringrupturedata, r1dict, r2dict);
 
-                // var l = Object.values(r1dict).length;
-                rupturestrength(r1dict);
+                var r1dict_l = Object.values(r1dict).length;
+                console.log('1.', r1dict_l);
+                if (r1dict_l === 3 || r1dict_l === 5) {
+
+                    console.log('in', r1dict_l);
+                    rupturestrength(r1dict);
+                }
 
                 if (rate != NaN) {
                     ringstrength(r2dict, rate);
+                    basewet = wetsum(r3dict, rate);
                 }
                          
                    
             }
             else {
+
+                // 選楞別
 
                 let id = $(this).val();
                 
@@ -363,26 +384,25 @@
                     rupturestrength(r1dict);
                     ringstrength(r2dict, rate);
 
-                    console.log(r1dict, r2dict);
+                    // console.log(r1dict, r2dict);
                 }
 
                 // Corrugatedinfo
                 rate = cheangeinfo(id, Corrugateddetail);
 
+               
                 // console.log(rate);
                 if (rate != NaN) {
                     ringstrength(r2dict, rate);
+                    basewet = wetsum(r3dict, rate);
                 }
                
 
             }
             
-
         });
 
-
-        console.log(longstr, widthstr, highstr);
-
+        
 
     });
 
@@ -417,6 +437,15 @@
             $('#addon2').hide();
             $('#cartonarea').hide();
             $('#boxinfo').show();
+
+            let ch = $('#c-high').text();
+            let rs = $('#ring_sum_1').text();
+            let p = $('#perimeter').text();
+            let k = $('#k').text();
+
+            // console.log('get', ch, rs, p, k);
+            // 箱壓強度
+            boxstrength(ch, rs, p, k);
         }
     });
 
