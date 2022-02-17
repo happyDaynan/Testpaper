@@ -6,6 +6,7 @@
     let hight = parseInt(highstr);
     let area_1 = parseInt(areastr);
     let area_2 = 0;
+    let box_wet_1, box_wet_2 = 0;
 
     console.log('in basewet', basewet);
 
@@ -16,7 +17,6 @@
 
         cardboardlong = (width + long) * 2;
         
-
         cardboardwidth = width + hight;
 
         $('#perimeter').html(cardboardlong);
@@ -29,10 +29,23 @@
         $('#cardboardarea').html(cardboardarea);
 
         area_2 = cardboardarea;
+       
+    }
 
-        
-    }    
-        
+    // 判斷是否回A型箱
+    if (basewet > 0) {
+
+        box_wet_1 = basewet * area_1; // 非A
+
+        if (area_2 > 0) {
+            box_wet_2 = basewet * area_2; // A
+        }
+        console.log(box_wet_1, box_wet_2);
+
+        return [box_wet_1, box_wet_2];
+    }
+    
+    
 };
 
 // 變更基重
@@ -47,46 +60,54 @@ function changewet(selectname, wet, ringrupturedata, r1dict, r2dict) {
     r1dict[selectname] = rupturestrength;
     r2dict[selectname] = ringstrength;
     
-    
-    switch (selectname) {
-        
-        case 'p1':
-            $('#p1-Wet').html(wet);
-            $('#p1-rupture').html(rupture);
-            $('#p1-rupturestrength').html(rupturestrength);
-            $('#p1-ring').html(ring);
-            $('#p1-ringstrength').html(ringstrength);
-            break;
-        case 'p2':
-            $('#p2-Wet').html(wet);
-            $('#p2-rupture').html(rupture);
-            $('#p2-rupturestrength').html(rupturestrength);
-            $('#p2-ring').html(ring);
-            $('#p2-ringstrength').html(ringstrength);
-            break;
-        case 'p3':
-            $('#p3-Wet').html(wet);
-            $('#p3-rupture').html(rupture);
-            $('#p3-rupturestrength').html(rupturestrength);
-            $('#p3-ring').html(ring);
-            $('#p3-ringstrength').html(ringstrength);
-            break;
-        case 'c1':
-            $('#c1-Wet').html(wet);
-            $('#c1-rupture').html(rupture);
-            $('#c1-rupturestrength').html(rupturestrength);
-            $('#c1-ring').html(ring);
-            $('#c1-ringstrength').html(ringstrength);
-            break;
-        case 'c2':
-            $('#c2-Wet').html(wet);
-            $('#c2-rupture').html(rupture);
-            $('#c2-rupturestrength').html(rupturestrength);
-            $('#c2-ring').html(ring);
-            $('#c2-ringstrength').html(ringstrength);
-            break;
 
-    }
+    $('#' + selectname + '-Wet').html(wet);
+    $('#' + selectname + '-rupture').html(rupture);
+    $('#' + selectname + '-rupturestrength').html(rupturestrength);
+    $('#' + selectname + '-ring').html(ring);
+    $('#' + selectname + '-ringstrength').html(ringstrength);
+
+
+
+    //switch (selectname) {
+        
+    //    case 'p1':
+    //        $('#p1-Wet').html(wet);
+    //        $('#p1-rupture').html(rupture);
+    //        $('#p1-rupturestrength').html(rupturestrength);
+    //        $('#p1-ring').html(ring);
+    //        $('#p1-ringstrength').html(ringstrength);
+    //        break;
+    //    case 'p2':
+    //        $('#p2-Wet').html(wet);
+    //        $('#p2-rupture').html(rupture);
+    //        $('#p2-rupturestrength').html(rupturestrength);
+    //        $('#p2-ring').html(ring);
+    //        $('#p2-ringstrength').html(ringstrength);
+    //        break;
+    //    case 'p3':
+    //        $('#p3-Wet').html(wet);
+    //        $('#p3-rupture').html(rupture);
+    //        $('#p3-rupturestrength').html(rupturestrength);
+    //        $('#p3-ring').html(ring);
+    //        $('#p3-ringstrength').html(ringstrength);
+    //        break;
+    //    case 'c1':
+    //        $('#c1-Wet').html(wet);
+    //        $('#c1-rupture').html(rupture);
+    //        $('#c1-rupturestrength').html(rupturestrength);
+    //        $('#c1-ring').html(ring);
+    //        $('#c1-ringstrength').html(ringstrength);
+    //        break;
+    //    case 'c2':
+    //        $('#c2-Wet').html(wet);
+    //        $('#c2-rupture').html(rupture);
+    //        $('#c2-rupturestrength').html(rupturestrength);
+    //        $('#c2-ring').html(ring);
+    //        $('#c2-ringstrength').html(ringstrength);
+    //        break;
+
+    //}
     return r1dict, r2dict;
     
 }
@@ -147,8 +168,7 @@ function rupturestrength(r1dict) {
 
     let c1_rupture = r1dict.c1 ? r1dict.c1 : 0;
     let c2_rupture = r1dict.c2 ? r1dict.c2 : 0; 
-      
-
+    
 
     let r = Math.min(parseFloat(c1_rupture), parseFloat(c2_rupture));
     
@@ -156,8 +176,8 @@ function rupturestrength(r1dict) {
     
     let rupture_sum_kpa = (rupture_sum * 98.0665).toFixed(0);
 
-    $('#rupture_sum').html(rupture_sum);
-    $('#rupture_sum_kpa').html(rupture_sum_kpa);
+    $('#rupture_sum').html(rupture_sum + ' ' + 'kgf/cm<sup>2</sup>');
+    $('#rupture_sum_kpa').html(rupture_sum_kpa + ' ' + 'kpa' );
 
 }
 
@@ -194,9 +214,9 @@ function ringstrength(r2dict, rate) {
         //ringstrength_sum = (ringstrength_sum).toFixed(2);
         let x = (ringstrength_sum * 9.80665).toFixed(2);
         let y = (ringstrength_sum * 2.204613 / 39.37).toFixed(2);
-        $('#ring_sum_1').html((ringstrength_sum).toFixed(2));
-        $('#ring_sum_2').html(x);
-        $('#ring_sum_3').html(y);
+        $('#ring_sum_1').html((ringstrength_sum).toFixed(2) + ' ' + 'kgf/m');
+        $('#ring_sum_2').html(x +' '+'N/m');
+        $('#ring_sum_3').html(y +' '+'lb/in');
 
               
     }
@@ -221,8 +241,11 @@ function boxstrength(ch, rs, p, k) {
     // k
     let kv = parseFloat(k);
 
+    console.log('in kv', kv);
 
-    let McKee_v = 5.87 * rs_sum * Math.pow((ch * p), 0.5) / 1000;
+    console.log('in box', rs_sum, high, perimeter, kv);
+
+    let McKee_v = 5.87 * rs_sum * Math.pow((high * perimeter), 0.5) / 1000;
 
     // 採購公式
     let purchase_v = kv * (rs_sum * 152.4 / 1000) * Math.pow((perimeter / 10), 1 / 3);
@@ -247,9 +270,6 @@ function boxstrength(ch, rs, p, k) {
 // 處理基重
 function wetsum(r3dict, rate ) {
 
-    
-
- 
 
     let sumwet = 0;
 
@@ -273,7 +293,8 @@ function wetsum(r3dict, rate ) {
     }
 
     if (sumwet > 0) {
-        $('#wet-info').html('基重' + sumwet + 'g/m2');
+
+        $('#wet-info').html(sumwet +' '+'g/m<sup>2</sup>');
     }
 
     return sumwet;

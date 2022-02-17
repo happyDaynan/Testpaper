@@ -3,8 +3,7 @@
 
 @{
     ViewBag.Title = "Index";
-
-    
+  
 }
 
 
@@ -13,9 +12,9 @@
         border-radius: 20px;
     }
 
-        .toggle.ios .toggle-handle {
-            border-radius: 20px;
-        }
+    .toggle.ios .toggle-handle {
+        border-radius: 20px;
+    }
 </style>
 
 
@@ -40,29 +39,29 @@
                         <div class="col-lg-12">
                             <table class="table table-striped">
                                 <tr>
-                                    <th class="col-lg-1">#</th>
-                                    <th class="col-lg-1">代號</th>
-                                    <th class="col-lg-2">基重</th>
-                                    <th class="col-lg-2">破裂指數</th>
-                                    <th class="col-lg-2">破裂強度</th>
-                                    <th class="col-lg-2">環壓指數</th>
-                                    <th class="col-lg-2">環壓強度</th>
+                                    <th class="col-md-1">#</th>
+                                    <th class="col-md-1 text-left">代號</th>
+                                    <th class="col-md-2 ">基重</th>
+                                    <th class="col-md-2 ">破裂指數</th>
+                                    <th class="col-md-2 ">破裂強度</th>
+                                    <th class="col-md-2 ">環壓指數</th>
+                                    <th class="col-md-2 ">環壓強度</th>
                                 </tr>
                                 <tr>
-                                    <th class="col-lg-1">面紙</th>
-                                    <th class="col-lg-1">
-                                        @Html.DropDownList("Paper_1", (IEnumerable<SelectListItem>)ViewBag.Classno, "-請選擇-", htmlAttributes: new { @class = "form-control", Name = "p1" })
+                                    <th class="col-lg-1">面紙</th>                                    
+                                    <th class="col-lg-2">
+                                        @Html.DropDownList("Paper_1", (IEnumerable<SelectListItem>)ViewBag.Classno, "-請選擇-", htmlAttributes: new { @class = "form-control", @style = "width:60%", Name = "p1" })
                                     </th>
-                                    <th id="p1-Wet" class="col-lg-2">0</th>
-                                    <th id="p1-rupture" class="col-lg-2">0</th>
-                                    <th id="p1-rupturestrength"class="col-lg-2">0</th>
+                                    <th id="p1-Wet" class="col-lg-2 ">0</th>
+                                    <th id="p1-rupture" class="col-lg-2 ">0</th>
+                                    <th id="p1-rupturestrength" class="col-lg-2 ">0</th>
                                     <th id="p1-ring" class="col-lg-2">0</th>
-                                    <th id="p1-ringstrength"class="col-lg-2">0</th>
+                                    <th id="p1-ringstrength" class="col-lg-2 ">0</th>
                                 </tr>
                                 <tr>
                                     <th class="col-lg-1">芯紙</th>
                                     <th class="col-lg-2">
-                                        @Html.DropDownList("Corepaper_1", (IEnumerable<SelectListItem>)ViewBag.Corepaper, "-請選擇-", htmlAttributes: new { @class = "form-control", Name = "c1" })
+                                        @Html.DropDownList("Corepaper_1", (IEnumerable<SelectListItem>)ViewBag.Corepaper, "-請選擇-", htmlAttributes: new { @class = "form-control", @style = "width:60%", Name = "c1" })
                                     </th>
                                     <th id="c1-Wet" class="col-lg-2">0</th>
                                     <th id="c1-rupture" class="col-lg-2">0</th>
@@ -73,7 +72,7 @@
                                 <tr>
                                     <th id="th_3" class="col-lg-1">底紙</th>
                                     <th class="col-lg-2">
-                                        @Html.DropDownList("Paper_2", (IEnumerable<SelectListItem>)ViewBag.Classno, "-請選擇-", htmlAttributes: new { @class = "form-control", Name = "p2" })
+                                        @Html.DropDownList("Paper_2", (IEnumerable<SelectListItem>)ViewBag.Classno, "-請選擇-", htmlAttributes: new { @class = "form-control", @style = "width:60%", Name = "p2" })
                                     </th>
                                     <th id="p2-Wet" class="col-lg-2">0</th>
                                     <th id="p2-rupture" class="col-lg-2">0</th>
@@ -84,7 +83,7 @@
                                 <tr id="tr4">
                                     <th class="col-lg-1">芯紙</th>
                                     <th class="col-lg-2">
-                                        @Html.DropDownList("Corepaper_2", (IEnumerable<SelectListItem>)ViewBag.Corepaper, "-請選擇-", htmlAttributes: new { @class = "form-control", Name = "c2" })
+                                        @Html.DropDownList("Corepaper_2", (IEnumerable<SelectListItem>)ViewBag.Corepaper, "-請選擇-", htmlAttributes: new { @class = "form-control", @style = "width:60%", Name = "c2" })
                                     </th>
                                     <th id="c2-Wet" class="col-lg-2">0</th>
                                     <th id="c2-rupture" class="col-lg-2">0</th>
@@ -95,7 +94,7 @@
                                 <tr id="tr5">
                                     <th class="col-lg-1">底紙</th>
                                     <th class="col-lg-2">
-                                        @Html.DropDownList("Paper_3", (IEnumerable<SelectListItem>)ViewBag.Classno, "-請選擇-", htmlAttributes: new { @class = "form-control", Name = "p3" })
+                                        @Html.DropDownList("Paper_3", (IEnumerable<SelectListItem>)ViewBag.Classno, "-請選擇-", htmlAttributes: new { @class = "form-control", @style = "width:60%", Name = "p3" })
                                     </th>
                                     <th id="p3-Wet" class="col-lg-2">0</th>
                                     <th id="p3-rupture" class="col-lg-2">0</th>
@@ -127,19 +126,19 @@
                             <div class="form-inline">
                                 <div class="input-group">
                                     <div class="input-group-addon">楞型</div>
-                                    @Html.DropDownList("corrugated", (IEnumerable<SelectListItem>)ViewBag.Corrugated, "--", htmlAttributes: new { @class = "form-control", Name = "corrugated" })
+                                    @Html.DropDownList("corrugated", (IEnumerable<SelectListItem>)ViewBag.Corrugated, "--", htmlAttributes: new { @class = "form-control",Name = "corrugated" })
                                     <div class="input-group-addon">長</div>
-                                    @Html.Editor("long", new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+                                    @Html.Editor("long", new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0", @step = "5", @Value = "0" } })
                                     <div class="input-group-addon">mm</div>
                                     <div class="input-group-addon">寬</div>
-                                    @Html.Editor("width", new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+                                    @Html.Editor("width", new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0", @step = "5", @Value = "0" } })
                                     <div class="input-group-addon">mm</div>
                                     <div class="input-group-addon">高</div>
-                                    @Html.Editor("high", new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+                                    @Html.Editor("high", new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0", @step = "5", @Value = "0" } })
                                     <div class="input-group-addon">mm</div>
                                     <div id="addon1" class="input-group-addon" for="cartonarea">紙箱面積</div>
-                                    @Html.Editor("cartonarea", new { htmlAttributes = new { @class = "form-control", @type = "number" } })
-                                    <div id="addon2" class="input-group-addon" for="cartonarea">mm</div>
+                                    @Html.Editor("cartonarea", new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0", @step = "5", @Value = "0" } })
+                                    <div id="addon2" class="input-group-addon" for="cartonarea">m<sup>2</sup></div>
                                 </div>
                             </div>
                         </div>
@@ -150,21 +149,21 @@
                             <table class="table table-bordered">
                                 <tr>
                                     <th>楞率</th>
-                                    <th id="c-rate">0</th>
+                                    <th id="c-rate" class="text-right">0</th>
                                     <th>楞高</th>
-                                    <th id="c-high">0</th>
-                                    <th>周長</th>
-                                    <th id="perimeter">0</th>
+                                    <th id="c-high" class="text-right">0</th>                                   
                                     <th>K</th>
-                                    <th id="k">0</th>
+                                    <th id="k" class="text-right">0</th>
                                 </tr>
                                 <tr>
-                                    <th>紙板長</th>
-                                    <th id="cardboardlong">0</th>
+                                    <th>紙板長/周長</th>
+                                    <th id="cardboardlong" class="text-right">0</th>
+                                    @*<th>周長</th>
+                                    <th id="perimeter" class="text-right">0</th>*@
                                     <th>紙板寬</th>
-                                    <th id="cardboardwidth">0</th>
+                                    <th id="cardboardwidth" class="text-right">0</th>
                                     <th>面積</th>
-                                    <th id="cardboardarea">0</th>
+                                    <th id="cardboardarea" class="text-right">0</th>
                                 </tr>
                             </table>
                         </div>
@@ -178,25 +177,40 @@
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <div class="row">
-                        <div class="text-left col-lg-8">分析結果</div>
-                        @*<div id="wet-info" class="text-right col-lg-6">基重: 0 g/m2 箱重: 0g</div>*@
-                        <div id="wet-info" class="text-right col-lg-2">基重: 0 g/m2</div>
-                        <div id="box-wet" class="text-right col-lg-2">箱重: 0g</div>
+                        <div class="text-left col-lg-8">分析結果</div>                     
                     </div>
                 </div>
                 <div class="panel-body">
                     <div class="row">
+                        <div class="col-lg-4">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th class="warning">基重</th>
+                                    <th id="wet-info" class="text-right">0 g/m<sup>2</sup></th>
+                                    
+                                </tr>
+                            </table>                            
+                        </div>
+                        <div class="col-lg-4">
+                            <table class="table table-bordered">
+                                <tr>                                
+                                    <th class="warning">箱重</th>
+                                    <th id="box-wet" class="text-right">0 g</th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-lg-3">
                             <table class="table table-bordered">
-                                <tr class="warning">
-                                    <th colspan="2">破裂強度(kgf/cm2, kpa)</th>
+                                <tr class="danger">
+                                    <th colspan="2">破裂強度</th>                                                                       
                                 </tr>
                                 <tr>
-                                    <td id="rupture_sum">0</td>
+                                    <td id="rupture_sum" class="text-right">0 kgf/cm<sup>2</sup></td>
+                                    <td id="rupture_sum_kpa" class="text-right">0 kpa</td>
                                 </tr>
-                                <tr>
-                                    <td id="rupture_sum_kpa">0</td>
-                                </tr>
+                                
                             </table>
                         </div>
                         <div class="col-lg-9">
@@ -204,15 +218,11 @@
                                 <tr class="danger">
                                     <th colspan="3">邊壓強度</th>
                                 </tr>
+                                
                                 <tr>
-                                    <td >kgf/m</td>
-                                    <td>N/m</td>
-                                    <td>lb/in</td>
-                                </tr>
-                                <tr>
-                                    <td id="ring_sum_1">0</td>
-                                    <td id="ring_sum_2">0</td>
-                                    <td id="ring_sum_3">0</td>
+                                    <td id="ring_sum_1" class="text-right">0 kgf/m</td>
+                                    <td id="ring_sum_2" class="text-right">0 N/m</td>
+                                    <td id="ring_sum_3" class="text-right">0 lb/in</td>
                                 </tr>
                             </table>
                         </div>
@@ -226,24 +236,24 @@
                                 </tr>
                                 <tr>
                                     <td>馬基公式</td>
-                                    <td id="m1">0</td>
-                                    <td id="m2">0</td>
-                                    <td id="m3">0</td>
-                                    <td id="m4">0</td>
+                                    <td id="m1" class="text-right">0</td>
+                                    <td id="m2" class="text-right">0</td>
+                                    <td id="m3" class="text-right">0</td>
+                                    <td id="m4" class="text-right">0</td>
                                 </tr>
                                 <tr>
                                     <td>原始採購公式</td>
-                                    <td id="p1">0</td>
-                                    <td id="p2">0</td>
-                                    <td id="p3">0</td>
-                                    <td id="p4">0</td>
+                                    <td id="p1" class="text-right">0</td>
+                                    <td id="p2" class="text-right">0</td>
+                                    <td id="p3" class="text-right">0</td>
+                                    <td id="p4" class="text-right">0</td>
                                 </tr>
                                 <tr>
                                     <td>百分比%</td>
-                                    <td>100%</td>
-                                    <td>90%</td>
-                                    <td>80%</td>
-                                    <td>70%</td>
+                                    <td class="text-right">100%</td>
+                                    <td class="text-right">90%</td>
+                                    <td class="text-right">80%</td>
+                                    <td class="text-right">70%</td>
                                 </tr>
                             </table>
                         </div>
@@ -275,6 +285,7 @@
 <script>
     //let box_perimeter = 0; 
     //let box_ringstrength = 0;
+    let isabox = [0,0];
 
     $(document).ready(function () {
 
@@ -287,6 +298,7 @@
         const r1dict = {};
         const r2dict = {};
         const r3dict = {};
+        const r4dict = {};
         
         let rate;
         let longstr, widthstr, highstr, areastr, basewet = 0;
@@ -317,9 +329,17 @@
         });
 
         $('#cartonarea').change(function () {
+
             areastr = $(this).val();
-            console.log('out', areastr);
-            Dataprocessing(longstr, widthstr, highstr, areastr, basewet);
+            // console.log('out', areastr);
+            isabox = Dataprocessing(longstr, widthstr, highstr,areastr, basewet);
+            // console.log(isabox);
+
+            $('#box-wet').html(isabox[0] + ' ' +'g');
+
+            
+
+            
         });
 
                    
@@ -334,69 +354,98 @@
                 // 選哪一種紙
                 let paperid = $(this).val();
 
-                let wet = mydata.find(element => element.id == paperid).avgWet;
+  
+                if (paperid == '') {
 
-                r3dict[selectname] = wet ;
+                    delete r1dict.selectname;
+                    delete r2dict.selectname;
+                    
+                    $('#' + selectname + '-Wet').html(0);
+                    $('#' + selectname + '-rupture').html(0);
+                    $('#' + selectname + '-rupturestrength').html(0);
+                    $('#' + selectname + '-ring').html(0);
+                    $('#' + selectname + '-ringstrength').html(0);
 
-                let papertypeid = mydata.find(element => element.id == paperid).remark;
+                    $('#rupture_sum').html(0 + ' ' + 'kgf/cm<sup>2</sup>');
+                    $('#rupture_sum_kpa').html(0 + ' ' + 'kpa');
 
-                let ringrupturedata = ringruptureindex(papertypeid, wet, Ringruptureindexdata);
+                }
+                else {
+                    let wet = mydata.find(element => element.id == paperid).avgWet;
 
-                // 變更基重值
-                changewet(selectname, wet, ringrupturedata, r1dict, r2dict);
+                    r3dict[selectname] = wet;
 
-                var r1dict_l = Object.values(r1dict).length;
-                console.log('1.', r1dict_l);
-                if (r1dict_l === 3 || r1dict_l === 5) {
+                    let papertypeid = mydata.find(element => element.id == paperid).remark;
 
-                    console.log('in', r1dict_l);
-                    rupturestrength(r1dict);
+                    let ringrupturedata = ringruptureindex(papertypeid, wet, Ringruptureindexdata);
+
+                    // 變更基重值
+                    changewet(selectname, wet, ringrupturedata, r1dict, r2dict);
+
+                    var r1dict_l = Object.values(r1dict).length;
+                    console.log('1.', r1dict_l);
+                    if (r1dict_l === 3 || r1dict_l === 5) {
+
+                        console.log('in', r1dict_l);
+                        rupturestrength(r1dict);
+                    }
+
+                    if (rate != NaN) {
+                        ringstrength(r2dict, rate);
+                        basewet = wetsum(r3dict, rate);
+                    }
                 }
 
-                if (rate != NaN) {
-                    ringstrength(r2dict, rate);
-                    basewet = wetsum(r3dict, rate);
-                }
                          
                    
             }
             else {
 
                 // 選楞別
-
                 let id = $(this).val();
-                
-                if (id == '6') {
-                    console.log('is AB');
-                    // 選到AB                   
-                    material.bootstrapToggle('off');    
+                console.log('目前選:', id);
 
-                } else {
-                    console.log('not AB');
-                    
-                    material.bootstrapToggle('on');
+                if (id == '') {
 
-                    delete r1dict.p3;
-                    delete r1dict.c2;
-                    delete r2dict.p3;
-                    delete r2dict.c2;
 
-                    rupturestrength(r1dict);
-                    ringstrength(r2dict, rate);
+                    $('#c-rate').html(0);
+                    $('#c-high').html(0);
+                    $('#k').html(0);
+                    $('#rupture_sum').html(0 + ' ' + 'kgf/cm<sup>2</sup>');
+                    $('#rupture_sum_kpa').html(0 + ' ' + 'kpa');
 
-                    // console.log(r1dict, r2dict);
                 }
+                else {
 
-                // Corrugatedinfo
-                rate = cheangeinfo(id, Corrugateddetail);
+                    if (id == '6') {
+                        console.log('is AB');
+                        // 選到AB                   
+                        material.bootstrapToggle('off');
 
-               
-                // console.log(rate);
-                if (rate != NaN) {
-                    ringstrength(r2dict, rate);
-                    basewet = wetsum(r3dict, rate);
+                    } else {
+                        console.log('not AB');
+
+                        material.bootstrapToggle('on');
+
+                        delete r1dict.p3;
+                        delete r1dict.c2;
+                        delete r2dict.p3;
+                        delete r2dict.c2;
+
+                        rupturestrength(r1dict);
+                        ringstrength(r2dict, rate);
+
+                       
+                    }
+
+                    // Corrugatedinfo
+                    rate = cheangeinfo(id, Corrugateddetail);
+
+                    if (rate != NaN) {
+                        ringstrength(r2dict, rate);
+                        basewet = wetsum(r3dict, rate);
+                    }
                 }
-               
 
             }
             
@@ -438,12 +487,17 @@
             $('#cartonarea').hide();
             $('#boxinfo').show();
 
+            console.log('box-wet',isabox[1]);
+            $('#box-wet').html(isabox[1] + 'g');
+
             let ch = $('#c-high').text();
             let rs = $('#ring_sum_1').text();
-            let p = $('#perimeter').text();
+            let p = $('#cardboardlong').text();
             let k = $('#k').text();
 
+            console.log('out', ch);
             // console.log('get', ch, rs, p, k);
+
             // 箱壓強度
             boxstrength(ch, rs, p, k);
         }
