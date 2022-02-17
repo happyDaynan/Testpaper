@@ -5,69 +5,80 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="testerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="BasePaperInfo">
+        <EntityType Name="basepaper_physicalproperty">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="SortId" Type="int" Nullable="false" />
-          <Property Name="BasePaperNo" Type="int" Nullable="false" />
-          <Property Name="RuptureValue" Type="numeric" Precision="2" Scale="1" />
-          <Property Name="PressureValue" Type="numeric" Precision="3" Scale="1" />
+          <Property Name="paperTypeId" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="rank" Type="char" MaxLength="1" />
+          <Property Name="ruptureIndex" Type="decimal" Precision="2" Scale="1" />
+          <Property Name="ringIndex" Type="decimal" Precision="3" Scale="1" />
         </EntityType>
-        <EntityType Name="PaperClass">
+        <EntityType Name="CN_MatPaperType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="paperTypeId" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="pclass" Type="char" MaxLength="1" />
+          <Property Name="paperTypeName" Type="nvarchar" MaxLength="20" />
+          <Property Name="reamrk" Type="nvarchar" MaxLength="300" />
+          <Property Name="invalidDate" Type="date" />
+          <Property Name="CREATER" Type="nvarchar" MaxLength="15" />
+          <Property Name="CREATE_DATE" Type="datetime" />
+          <Property Name="MODEIFIER" Type="nvarchar" MaxLength="15" />
+          <Property Name="MODI_DATE" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CN_PaperCode">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="issueDate" Type="date" Nullable="false" />
+          <Property Name="code" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="paperType" Type="int" Nullable="false" />
+          <Property Name="cDesc" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="r1" Type="smallint" Nullable="false" />
+          <Property Name="r2" Type="smallint" Nullable="false" />
+          <Property Name="avgWet" Type="int" StoreGeneratedPattern="Computed" />
+          <Property Name="remark" Type="varchar" MaxLength="30" />
+          <Property Name="invalid" Type="bit" />
+          <Property Name="createUser" Type="varchar" MaxLength="30" />
+          <Property Name="createTime" Type="datetime" />
+          <Property Name="modifyUser" Type="varchar" MaxLength="30" />
+          <Property Name="modifyTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="corrugatedTypedetail">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="SortId" Type="int" Nullable="false" />
-          <Property Name="ClassNo" Type="char" MaxLength="1" Nullable="false" />
-          <Property Name="BaseWeighMin" Type="int" Nullable="false" />
-          <Property Name="BaseWeighMax" Type="int" Nullable="false" />
+          <Property Name="corrugatedType" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="corrugatedrate" Type="decimal" Precision="3" Scale="2" />
+          <Property Name="corrugatedhigh" Type="decimal" Precision="2" Scale="1" />
+          <Property Name="k" Type="decimal" Precision="4" Scale="3" />
         </EntityType>
-        <EntityType Name="PaperSort">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="No" Type="char" MaxLength="3" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="20" Nullable="false" />
-        </EntityType>
-        <Association Name="FK_BasePaperInfo_PaperSort">
-          <End Role="PaperSort" Type="Self.PaperSort" Multiplicity="1" />
-          <End Role="BasePaperInfo" Type="Self.BasePaperInfo" Multiplicity="*" />
+        <Association Name="FK_CN_PaperCode_CN_MatPaperType">
+          <End Role="CN_MatPaperType" Type="Self.CN_MatPaperType" Multiplicity="1" />
+          <End Role="CN_PaperCode" Type="Self.CN_PaperCode" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="PaperSort">
-              <PropertyRef Name="Id" />
+            <Principal Role="CN_MatPaperType">
+              <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="BasePaperInfo">
-              <PropertyRef Name="SortId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PaperClass_PaperSort">
-          <End Role="PaperSort" Type="Self.PaperSort" Multiplicity="1" />
-          <End Role="PaperClass" Type="Self.PaperClass" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PaperSort">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PaperClass">
-              <PropertyRef Name="SortId" />
+            <Dependent Role="CN_PaperCode">
+              <PropertyRef Name="paperType" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="testerModelStoreContainer">
-          <EntitySet Name="BasePaperInfo" EntityType="Self.BasePaperInfo" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PaperClass" EntityType="Self.PaperClass" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PaperSort" EntityType="Self.PaperSort" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_BasePaperInfo_PaperSort" Association="Self.FK_BasePaperInfo_PaperSort">
-            <End Role="PaperSort" EntitySet="PaperSort" />
-            <End Role="BasePaperInfo" EntitySet="BasePaperInfo" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PaperClass_PaperSort" Association="Self.FK_PaperClass_PaperSort">
-            <End Role="PaperSort" EntitySet="PaperSort" />
-            <End Role="PaperClass" EntitySet="PaperClass" />
+          <EntitySet Name="basepaper_physicalproperty" EntityType="Self.basepaper_physicalproperty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CN_MatPaperType" EntityType="Self.CN_MatPaperType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CN_PaperCode" EntityType="Self.CN_PaperCode" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="corrugatedTypedetail" EntityType="Self.corrugatedTypedetail" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CN_PaperCode_CN_MatPaperType" Association="Self.FK_CN_PaperCode_CN_MatPaperType">
+            <End Role="CN_MatPaperType" EntitySet="CN_MatPaperType" />
+            <End Role="CN_PaperCode" EntitySet="CN_PaperCode" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -75,107 +86,143 @@
     <edmx:ConceptualModels>
       <Schema Namespace="testerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="testerEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="PaperClass" EntityType="testerModel.PaperClass" />
-          <EntitySet Name="PaperSort" EntityType="testerModel.PaperSort" />
-          <AssociationSet Name="FK_PaperClass_PaperSort" Association="testerModel.FK_PaperClass_PaperSort">
-            <End Role="PaperSort" EntitySet="PaperSort" />
-            <End Role="PaperClass" EntitySet="PaperClass" />
+          <EntitySet Name="CN_MatPaperType" EntityType="testerModel.CN_MatPaperType" />
+          <EntitySet Name="CN_PaperCode" EntityType="testerModel.CN_PaperCode" />
+          <AssociationSet Name="FK_CN_PaperCode_CN_MatPaperType" Association="testerModel.FK_CN_PaperCode_CN_MatPaperType">
+            <End Role="CN_MatPaperType" EntitySet="CN_MatPaperType" />
+            <End Role="CN_PaperCode" EntitySet="CN_PaperCode" />
           </AssociationSet>
-          <EntitySet Name="BasePaperInfo" EntityType="testerModel.BasePaperInfo" />
-          <AssociationSet Name="FK_BasePaperInfo_PaperSort" Association="testerModel.FK_BasePaperInfo_PaperSort">
-            <End Role="PaperSort" EntitySet="PaperSort" />
-            <End Role="BasePaperInfo" EntitySet="BasePaperInfo" />
-          </AssociationSet>
+          <EntitySet Name="corrugatedTypedetail" EntityType="testerModel.corrugatedTypedetail" />
+          <EntitySet Name="basepaper_physicalproperty" EntityType="testerModel.basepaper_physicalproperty" />
         </EntityContainer>
-        <EntityType Name="PaperClass">
+        <EntityType Name="CN_MatPaperType">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SortId" Type="Int32" Nullable="false" />
-          <Property Name="ClassNo" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="BaseWeighMin" Type="Int32" Nullable="false" />
-          <Property Name="BaseWeighMax" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="PaperSort" Relationship="testerModel.FK_PaperClass_PaperSort" FromRole="PaperClass" ToRole="PaperSort" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="paperTypeId" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="pclass" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="paperTypeName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="reamrk" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="invalidDate" Type="DateTime" Precision="0" />
+          <Property Name="CREATER" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="CREATE_DATE" Type="DateTime" Precision="3" />
+          <Property Name="MODEIFIER" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="MODI_DATE" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CN_PaperCode" Relationship="testerModel.FK_CN_PaperCode_CN_MatPaperType" FromRole="CN_MatPaperType" ToRole="CN_PaperCode" />
         </EntityType>
-        <EntityType Name="PaperSort">
+        <EntityType Name="CN_PaperCode">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="No" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="PaperClass" Relationship="testerModel.FK_PaperClass_PaperSort" FromRole="PaperSort" ToRole="PaperClass" />
-          <NavigationProperty Name="BasePaperInfo" Relationship="testerModel.FK_BasePaperInfo_PaperSort" FromRole="PaperSort" ToRole="BasePaperInfo" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="issueDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="code" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="paperType" Type="Int32" Nullable="false" />
+          <Property Name="cDesc" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="r1" Type="Int16" Nullable="false" />
+          <Property Name="r2" Type="Int16" Nullable="false" />
+          <Property Name="avgWet" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="remark" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="invalid" Type="Boolean" />
+          <Property Name="createUser" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="createTime" Type="DateTime" Precision="3" />
+          <Property Name="modifyUser" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="modifyTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CN_MatPaperType" Relationship="testerModel.FK_CN_PaperCode_CN_MatPaperType" FromRole="CN_PaperCode" ToRole="CN_MatPaperType" />
         </EntityType>
-        <Association Name="FK_PaperClass_PaperSort">
-          <End Type="testerModel.PaperSort" Role="PaperSort" Multiplicity="1" />
-          <End Type="testerModel.PaperClass" Role="PaperClass" Multiplicity="*" />
+        <Association Name="FK_CN_PaperCode_CN_MatPaperType">
+          <End Type="testerModel.CN_MatPaperType" Role="CN_MatPaperType" Multiplicity="1" />
+          <End Type="testerModel.CN_PaperCode" Role="CN_PaperCode" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="PaperSort">
-              <PropertyRef Name="Id" />
+            <Principal Role="CN_MatPaperType">
+              <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="PaperClass">
-              <PropertyRef Name="SortId" />
+            <Dependent Role="CN_PaperCode">
+              <PropertyRef Name="paperType" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="BasePaperInfo">
+        <EntityType Name="corrugatedTypedetail">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SortId" Type="Int32" Nullable="false" />
-          <Property Name="BasePaperNo" Type="Int32" Nullable="false" />
-          <Property Name="RuptureValue" Type="Decimal" Precision="2" Scale="1" />
-          <Property Name="PressureValue" Type="Decimal" Precision="3" Scale="1" />
-          <NavigationProperty Name="PaperSort" Relationship="testerModel.FK_BasePaperInfo_PaperSort" FromRole="BasePaperInfo" ToRole="PaperSort" />
+          <Property Name="corrugatedType" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="corrugatedrate" Type="Decimal" Precision="3" Scale="2" />
+          <Property Name="corrugatedhigh" Type="Decimal" Precision="2" Scale="1" />
+          <Property Name="k" Type="Decimal" Precision="4" Scale="3" />
         </EntityType>
-        <Association Name="FK_BasePaperInfo_PaperSort">
-          <End Type="testerModel.PaperSort" Role="PaperSort" Multiplicity="1" />
-          <End Type="testerModel.BasePaperInfo" Role="BasePaperInfo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PaperSort">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="BasePaperInfo">
-              <PropertyRef Name="SortId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-      </Schema>
+        <EntityType Name="basepaper_physicalproperty">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="paperTypeId" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="rank" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="ruptureIndex" Type="Decimal" Precision="2" Scale="1" />
+          <Property Name="ringIndex" Type="Decimal" Precision="3" Scale="1" />
+        </EntityType>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="testerModelStoreContainer" CdmEntityContainer="testerEntities">
-          <EntitySetMapping Name="PaperClass">
-            <EntityTypeMapping TypeName="testerModel.PaperClass">
-              <MappingFragment StoreEntitySet="PaperClass">
-                <ScalarProperty Name="BaseWeighMax" ColumnName="BaseWeighMax" />
-                <ScalarProperty Name="BaseWeighMin" ColumnName="BaseWeighMin" />
-                <ScalarProperty Name="ClassNo" ColumnName="ClassNo" />
-                <ScalarProperty Name="SortId" ColumnName="SortId" />
+          <EntitySetMapping Name="CN_MatPaperType">
+            <EntityTypeMapping TypeName="testerModel.CN_MatPaperType">
+              <MappingFragment StoreEntitySet="CN_MatPaperType">
+                <ScalarProperty Name="MODI_DATE" ColumnName="MODI_DATE" />
+                <ScalarProperty Name="MODEIFIER" ColumnName="MODEIFIER" />
+                <ScalarProperty Name="CREATE_DATE" ColumnName="CREATE_DATE" />
+                <ScalarProperty Name="CREATER" ColumnName="CREATER" />
+                <ScalarProperty Name="invalidDate" ColumnName="invalidDate" />
+                <ScalarProperty Name="reamrk" ColumnName="reamrk" />
+                <ScalarProperty Name="paperTypeName" ColumnName="paperTypeName" />
+                <ScalarProperty Name="pclass" ColumnName="pclass" />
+                <ScalarProperty Name="paperTypeId" ColumnName="paperTypeId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CN_PaperCode">
+            <EntityTypeMapping TypeName="testerModel.CN_PaperCode">
+              <MappingFragment StoreEntitySet="CN_PaperCode">
+                <ScalarProperty Name="modifyTime" ColumnName="modifyTime" />
+                <ScalarProperty Name="modifyUser" ColumnName="modifyUser" />
+                <ScalarProperty Name="createTime" ColumnName="createTime" />
+                <ScalarProperty Name="createUser" ColumnName="createUser" />
+                <ScalarProperty Name="invalid" ColumnName="invalid" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="avgWet" ColumnName="avgWet" />
+                <ScalarProperty Name="r2" ColumnName="r2" />
+                <ScalarProperty Name="r1" ColumnName="r1" />
+                <ScalarProperty Name="cDesc" ColumnName="cDesc" />
+                <ScalarProperty Name="paperType" ColumnName="paperType" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="issueDate" ColumnName="issueDate" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="corrugatedTypedetail">
+            <EntityTypeMapping TypeName="testerModel.corrugatedTypedetail">
+              <MappingFragment StoreEntitySet="corrugatedTypedetail">
+                <ScalarProperty Name="k" ColumnName="k" />
+                <ScalarProperty Name="corrugatedhigh" ColumnName="corrugatedhigh" />
+                <ScalarProperty Name="corrugatedrate" ColumnName="corrugatedrate" />
+                <ScalarProperty Name="corrugatedType" ColumnName="corrugatedType" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PaperSort">
-            <EntityTypeMapping TypeName="testerModel.PaperSort">
-              <MappingFragment StoreEntitySet="PaperSort">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="No" ColumnName="No" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BasePaperInfo">
-            <EntityTypeMapping TypeName="testerModel.BasePaperInfo">
-              <MappingFragment StoreEntitySet="BasePaperInfo">
-                <ScalarProperty Name="PressureValue" ColumnName="PressureValue" />
-                <ScalarProperty Name="RuptureValue" ColumnName="RuptureValue" />
-                <ScalarProperty Name="BasePaperNo" ColumnName="BasePaperNo" />
-                <ScalarProperty Name="SortId" ColumnName="SortId" />
+          <EntitySetMapping Name="basepaper_physicalproperty">
+            <EntityTypeMapping TypeName="testerModel.basepaper_physicalproperty">
+              <MappingFragment StoreEntitySet="basepaper_physicalproperty">
+                <ScalarProperty Name="ringIndex" ColumnName="ringIndex" />
+                <ScalarProperty Name="ruptureIndex" ColumnName="ruptureIndex" />
+                <ScalarProperty Name="rank" ColumnName="rank" />
+                <ScalarProperty Name="paperTypeId" ColumnName="paperTypeId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -12,22 +12,26 @@ namespace Testpaper.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PaperSort
+    public partial class CN_MatPaperType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PaperSort()
+        public CN_MatPaperType()
         {
-            this.PaperClass = new HashSet<PaperClass>();
-            this.BasePaperInfo = new HashSet<BasePaperInfo>();
+            this.CN_PaperCode = new HashSet<CN_PaperCode>();
         }
     
-        public int Id { get; set; }
-        public string No { get; set; }
-        public string Name { get; set; }
+        public int id { get; set; }
+        public string paperTypeId { get; set; }
+        public string pclass { get; set; }
+        public string paperTypeName { get; set; }
+        public string reamrk { get; set; }
+        public Nullable<System.DateTime> invalidDate { get; set; }
+        public string CREATER { get; set; }
+        public Nullable<System.DateTime> CREATE_DATE { get; set; }
+        public string MODEIFIER { get; set; }
+        public Nullable<System.DateTime> MODI_DATE { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PaperClass> PaperClass { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BasePaperInfo> BasePaperInfo { get; set; }
+        public virtual ICollection<CN_PaperCode> CN_PaperCode { get; set; }
     }
 }

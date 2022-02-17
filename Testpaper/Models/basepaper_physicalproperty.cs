@@ -12,14 +12,12 @@ namespace Testpaper.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class BasePaperInfo
+    public partial class basepaper_physicalproperty
     {
         public int Id { get; set; }
-        public int SortId { get; set; }
-        public int BasePaperNo { get; set; }
-        public Nullable<decimal> RuptureValue { get; set; }
-        public Nullable<decimal> PressureValue { get; set; }
-    
-        public virtual PaperSort PaperSort { get; set; }
+        public string paperTypeId { get; set; }
+        public string rank { get; set; }
+        public Nullable<decimal> ruptureIndex { get; set; }
+        public Nullable<decimal> ringIndex { get; set; }
     }
 }

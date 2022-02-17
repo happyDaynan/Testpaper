@@ -12,14 +12,12 @@ namespace Testpaper.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PaperClass
+    public partial class corrugatedTypedetail
     {
         public int Id { get; set; }
-        public int SortId { get; set; }
-        public string ClassNo { get; set; }
-        public int BaseWeighMin { get; set; }
-        public int BaseWeighMax { get; set; }
-    
-        public virtual PaperSort PaperSort { get; set; }
+        public string corrugatedType { get; set; }
+        public Nullable<decimal> corrugatedrate { get; set; }
+        public Nullable<decimal> corrugatedhigh { get; set; }
+        public Nullable<decimal> k { get; set; }
     }
 }

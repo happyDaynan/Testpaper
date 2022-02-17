@@ -15,7 +15,17 @@ namespace Testpaper.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            ViewBag.data = db.CN_PaperCode.Where(m => m.invalid != true)
+                           .Select(m => new { m.id, m.avgWet, m.remark}).ToArray();
+
+            ViewBag.Corrugateddetail = db.corrugatedTypedetail.ToArray();
+
+            ViewBag.ringruptureindex = db.basepaper_physicalproperty.ToArray();
+
             ViewBag.Classno = Tools.PaperClass();
+            ViewBag.Corrugated = Tools.Corrugated();
+            ViewBag.Corepaper = Tools.Corepaper();
+
 
             return View();
         }
